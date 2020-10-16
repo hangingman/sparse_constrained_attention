@@ -35,6 +35,7 @@ $ git clone -b dev https://github.com/hangingman/OpenNMT-py.git
 
 - Prepare WMT2016 dataset
   - https://github.com/rsennrich/wmt16-scripts
+  - will be described in next chapter... 
 
 
 ### Preparing the data for a language pair
@@ -44,6 +45,11 @@ The procedure below works for other language pairs, provided the file names
 are consistent.
 
 1. Store your data (tokenized and BPE'ed) in a data folder `<DATA PATH>/ro-en`.
+
+- You can download and preprocess dataset with https://github.com/rsennrich/wmt16-scripts
+  - Checkout wmt16-scripts, then execute `download_files.sh` and `preprocess.sh`
+  - At least, you will find files; `corpus.bpe.ro`, `corpus.bpe.en`, `newsdev2016.bpe.ro`, `newsdev2016.bpe.en`
+  - I can't find `newstest2016.*` files but it looks script working 
 
 This must contain the following files:
 - `corpus.bpe.ro`
