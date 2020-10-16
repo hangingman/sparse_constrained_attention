@@ -44,29 +44,29 @@ class Aligner:
 
     def align(self, line):
         # f words ||| e words ||| links ||| score
-        if self.fwd_align != None:
+        if self.fwd_align is not None:
             self.fwd_align.stdin.write('{}\n'.format(line))
             fwd_line = self.fwd_align.stdout.readline().split('|||')[2].strip()
-        if self.rev_align != None:
+        if self.rev_align is not None:
             self.rev_align.stdin.write('{}\n'.format(line))
             rev_line = self.rev_align.stdout.readline().split('|||')[2].strip()
-        if self.fwd_align != None and self.rev_align != None:
+        if self.fwd_align is not None and self.rev_align is not None:
             self.tools.stdin.write('{}\n'.format(fwd_line))
             self.tools.stdin.write('{}\n'.format(rev_line))
             al_line = self.tools.stdout.readline().strip()
             return al_line
-        elif self.fwd_align != None:
+        elif self.fwd_align is not None:
             return fwd_line
-        elif self.rev_align != None:
+        elif self.rev_align is not None:
             return rev_line
         else:
             return ''
 
     def close(self):
-        if self.fwd_align != None:
+        if self.fwd_align is not None:
             self.fwd_align.stdin.close()
             self.fwd_align.wait()
-        if self.rev_align != None:
+        if self.rev_align is not None:
             self.rev_align.stdin.close()
             self.rev_align.wait()
         self.tools.stdin.close()
@@ -106,7 +106,8 @@ def main():
             '  {} fwd_params fwd_err rev_params rev_err [heuristic] <in.f-e >out.f-e.gdfa\n'.format(sys.argv[0]))
         sys.stderr.write('\n')
         sys.stderr.write(
-            'where heuristic is one of: (intersect union grow-diag grow-diag-final grow-diag-final-and) default=grow-diag-final-and\n')
+            'where heuristic is one of: (intersect union grow-diag grow-diag-final grow-diag-final-and) '
+            'default=grow-diag-final-and\n')
         sys.exit(2)
 
     aligner = Aligner(*sys.argv[1:])
