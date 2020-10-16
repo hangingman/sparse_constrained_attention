@@ -45,14 +45,18 @@ class Aligner:
     def align(self, line):
         # f words ||| e words ||| links ||| score
         if self.fwd_align is not None:
-            self.fwd_align.stdin.write('{}\n'.format(line))
+            line_to_write = '{}\n'.format(line)
+            self.fwd_align.stdin.write(line_to_write.encode('utf-8'))
             fwd_line = self.fwd_align.stdout.readline().split('|||')[2].strip()
         if self.rev_align is not None:
-            self.rev_align.stdin.write('{}\n'.format(line))
+            line_to_write = '{}\n'.format(line)
+            self.rev_align.stdin.write(line_to_write.encode('utf-8'))
             rev_line = self.rev_align.stdout.readline().split('|||')[2].strip()
         if self.fwd_align is not None and self.rev_align is not None:
-            self.tools.stdin.write('{}\n'.format(fwd_line))
-            self.tools.stdin.write('{}\n'.format(rev_line))
+            fwd_line_to_write = '{}\n'.format(fwd_line)
+            rev_line_to_write = '{}\n'.format(rev_line)
+            self.tools.stdin.write(fwd_line_to_write.encode('utf-8'))
+            self.tools.stdin.write(rev_line_to_write.encode('utf-8'))
             al_line = self.tools.stdout.readline().strip()
             return al_line
         elif self.fwd_align is not None:
