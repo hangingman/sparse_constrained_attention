@@ -6,13 +6,36 @@ by Chaitanya Malaviya, Pedro Ferreira, André Martins
 
 ### Prerequisites
 
+All procedures are supposed to do in this project root directory:
+
 - fast_align (https://github.com/clab/fast_align)
-- PyTorch, version 0.3.0
+
+```
+$ sudo apt-get install libgoogle-perftools-dev libsparsehash-dev
+$ git clone https://github.com/clab/fast_align.git
+$ cd fast_align
+$ mkdir build && cd build && cmake .. && make
+```
+
+- Python 3.6.10
+  - torch==0.3.1
+  - torchtext==0.2.3
+
+```
+$ pip install -r requirements.txt
+```
+
 - OpenNMT-py Unbabel fork (instructions below)
+  - I modified OpenNMT-py for python 3.6, you can use it
+  - https://github.com/hangingman/OpenNMT-py.git
 
-### OpenNMT-py Unbabel fork
+```
+$ git clone -b dev https://github.com/hangingman/OpenNMT-py.git
+```
 
-- Please clone the `dev` branch of the repo at https://github.com/Unbabel/OpenNMT-py/tree/dev.
+- Prepare WMT2016 dataset
+  - https://github.com/rsennrich/wmt16-scripts
+
 
 ### Preparing the data for a language pair
 
@@ -21,6 +44,7 @@ The procedure below works for other language pairs, provided the file names
 are consistent.
 
 1. Store your data (tokenized and BPE'ed) in a data folder `<DATA PATH>/ro-en`.
+
 This must contain the following files:
 - `corpus.bpe.ro`
 - `corpus.bpe.en`

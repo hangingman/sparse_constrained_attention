@@ -2,8 +2,8 @@ model=$1
 source=$2
 target=$3
 
-OPENNMT=/mnt/disk/afm/OpenNMT-py
-SCRIPTS="`cd $(dirname $0);pwd`"
+SCRIPTS="$(cd $(dirname $0); pwd)"
+OPENNMT="${SCRIPTS}/OpenNMT-py"
 
 gpu=0
 dump_attention=true #false

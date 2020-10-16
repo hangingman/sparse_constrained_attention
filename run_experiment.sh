@@ -1,11 +1,12 @@
 gpu=$1
 SOURCE=$2 # ro
 TARGET=$3 # en
+
+SCRIPTS="$(cd $(dirname $0); pwd)"
 LANGPAIR=${SOURCE}-${TARGET}
-DATA=/mnt/disk/afm/data/${LANGPAIR}
+DATA="${SCRIPTS}/data/${LANGPAIR}"
 MODEL=/mnt/disk/afm/model/${LANGPAIR}
-OPENNMT=/mnt/disk/afm/OpenNMT-py
-SCRIPTS="`cd $(dirname $0);pwd`"
+OPENNMT="${SCRIPTS}/OpenNMT-py"
 LOGS=${SCRIPTS}/logs
 ATTN=$4 # softmax|sparsemax|csoftmax|csparsemax
 cattn=$5 # 0|0.2

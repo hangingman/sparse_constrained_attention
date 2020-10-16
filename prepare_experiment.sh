@@ -1,10 +1,12 @@
-SOURCE=$1 # ro
-TARGET=$2 # en
+#!/bin/bash -x
+
+SOURCE=$1
+TARGET=$2
 LANGPAIR=${SOURCE}-${TARGET}
-DATA=/mnt/disk/afm/data/${LANGPAIR}
-ALIGNER=/mnt/disk/afm/fast_align/build
-OPENNMT=/mnt/disk/afm/OpenNMT-py
-SCRIPTS="`cd $(dirname $0);pwd`"
+SCRIPTS="$(cd $(dirname $0); pwd)"
+DATA="${SCRIPTS}/data/${LANGPAIR}"
+ALIGNER="${SCRIPTS}/fast_align/build"
+OPENNMT="${SCRIPTS}/OpenNMT-py"
 preprocess=true
 align=true
 fertilize=true
@@ -15,7 +17,7 @@ if $preprocess
 then
     for prefix in corpus newsdev2016 newstest2016
     do
-        sed 's/$/ <sink>/' ${DATA}/$prefix.bpe.${SOURCE} > ${DATA}/$prefix.bpe.sink.${SOURCE}
+        sed -e 's/$/ <sink>/g' ${DATA}/$prefix.bpe.${SOURCE} > ${DATA}/$prefix.bpe.sink.${SOURCE}
     done
 
     rm -rf ${DATA}/preprocessed.sink.align*.pt
